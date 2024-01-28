@@ -20,7 +20,7 @@ class CarListSeeder extends Seeder
                 'model' => 'lorem-' . $i,
                 'no_car' => 'B 1010 B' . $i,
                 'price' => 5000,
-                'photo' => 'lorem ipsum.png',
+                'photo' => null,
                 'status' => false,
             ]);
         }

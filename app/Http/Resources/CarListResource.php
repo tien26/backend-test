@@ -20,7 +20,7 @@ class CarListResource extends JsonResource
             'model' => $this->model,
             'no_car' => $this->no_car,
             'price' => $this->price,
-            'photo' => $this->photo,
+            'photo' => $this->photo != null ? url('storage/car-img/' . $this->photo) : null,
             'status' => $this->status,
         ];
     }

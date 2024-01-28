@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserDetailResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,12 +37,6 @@ class AuthController extends Controller
             return $this->errorResponse('email or password wrong!', 400);
         }
         $user = User::where('email', $request['email'])->first();
-
-        // if (!$user->is_active) {
-        //     return $this->errorResponse('the account is no active!', 404);
-        // }
-        // $expired = Passport::tokensExpireIn();
-        // $refresh_expired = Passport::refreshTokensExpireIn();
         $token = $user->createToken('my-token');
         return $this->successResponse([
             'access_token' => $token->accessToken,
@@ -57,5 +52,11 @@ class AuthController extends Controller
         $user = Auth::user()->token();
         $user->revoke();
         return $this->successResponse(null, 'logged out success');
+    }
+
+    public function getAccount(Request $request)
+    {
+        $account = User::Detail(request('id'))->first();
+        return $this->successResponse($account);
     }
 }

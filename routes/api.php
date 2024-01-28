@@ -25,10 +25,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::resource('/user-details', UserDetailController::class);
-Route::resource('/car-lists', CarListController::class);
-Route::resource('/car-loans', CarLoanController::class);
-Route::resource('/borrowing-histories', BorrowingHistoryController::class);
 Route::middleware('auth:api')->group(function () {
+    Route::resource('/user-details', UserDetailController::class);
+    Route::resource('/car-lists', CarListController::class);
+    Route::resource('/car-loans', CarLoanController::class);
+    Route::resource('/borrowing-histories', BorrowingHistoryController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/get-account', [AuthController::class, 'getAccount']);
 });

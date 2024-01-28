@@ -84,7 +84,7 @@ class CarListController extends Controller
                 'model' => 'required|string',
                 'no_car' => 'required|string|unique:car_lists,no_car',
                 'price' => 'required|integer',
-                'photo' => 'required',
+                // 'photo' => 'required',
                 'status' => 'boolean',
             ]);
         } else {
@@ -93,7 +93,7 @@ class CarListController extends Controller
                 'model' => 'required|string',
                 'no_car' => 'required',
                 'price' => 'required|integer',
-                'photo' => 'required',
+                // 'photo' => 'required',
                 'status' => 'boolean',
             ]);
         }

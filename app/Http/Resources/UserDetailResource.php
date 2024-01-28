@@ -16,11 +16,11 @@ class UserDetailResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user_id' => $this->user_id,
+            'email' => $this->email,
             'name' => $this->name,
             'phone' => $this->phone,
             'sim' => $this->sim,
-            'photo' => url('storage/user-img/' . $this->photo),
+            'photo' => $this->photo != null ? url('storage/user-img/' . $this->photo) : null,
         ];
     }
 }

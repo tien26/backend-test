@@ -17,9 +17,9 @@ class UserDetailSeeder extends Seeder
         for ($i = 0; $i < 5; $i++) {
             UserDetail::create([
                 'user_id' => $i,
-                'name' => 'lorem ipsum' . $i,
+                'name' => 'lorem user-' . $i,
                 'phone' => '081293891283',
-                'sim' => 'B 1010 B' . $i,
+                'sim' => '012-01290-81' . $i,
                 'photo' => 'photo',
             ]);
         }

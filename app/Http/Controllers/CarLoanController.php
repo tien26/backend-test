@@ -20,7 +20,7 @@ class CarLoanController extends Controller
         // $sorted_by = $request->input('sorted_by') ? $request->input('sorted_by') : 'created_at';
         $sort = $request->input('sort') ? $request->input('sort') : 'desc';
 
-        $car_loan = CarLoan::RelationLoan(request('search'))->paginate($limit);
+        $car_loan = CarLoan::RelationLoan(request(['user', 'loan']))->paginate($limit);
         // ->orderBy($sorted_by, $sort)
 
         return $this->paginateResponse(CarLoanResource::collection($car_loan));

@@ -19,7 +19,7 @@ class CreateCarListsTable extends Migration
             $table->string('model', 255);
             $table->string('no_car', 255);
             $table->integer('price');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->boolean('status');
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();

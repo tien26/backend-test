@@ -13,7 +13,7 @@ class CarLoan extends Model
 
     protected $guarded = ['id'];
 
-    public function scopeRelationLoan($query, $filter)
+    public function scopeRelationLoan($query, array $filter)
     {
         return DB::table('car_loans as a')
             ->join('user_details as b', 'b.user_id', '=', 'a.user_id')
@@ -34,8 +34,11 @@ class CarLoan extends Model
                 'c.no_car',
                 'c.price',
             )
-            ->when($filter, function ($query, $no_loan) {
+            ->when($filter['loan'] ?? false, function ($query, $no_loan) {
                 return $query->where('a.no_loan', 'ilike', '%' . $no_loan . '%');
+            })
+            ->when($filter['user'] ?? false, function ($query, $user) {
+                return $query->where('a.user_id',  $user);
             })
             // ->when($filter['status'], function ($query, $status) {
             //     return $query->where('a.status', $status);
