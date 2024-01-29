@@ -13,7 +13,7 @@ class BorrowingHistory extends Model
 
     protected $guarded = ['id'];
 
-    public function scopeHistory($query)
+    public function scopeHistory($query, array $filter)
     {
         return DB::table('borrowing_histories as a')
             ->join('car_loans as b', 'b.id', '=', 'a.loan_id')
@@ -31,21 +31,13 @@ class BorrowingHistory extends Model
                 'c.name',
                 'c.phone',
                 'c.sim',
-                // 'b.status as status_loan',
-                // 'b.name',
-                // 'b.sim',
-                // 'b.phone',
-                // 'c.merk',
-                // 'c.model',
-                // 'c.no_car',
-                // 'c.price',
-            );
-        // ->when($filter, function ($query, $no_loan) {
-        //     return $query->where('a.no_loan', 'ilike', '%' . $no_loan . '%');
-        // })
-        // ->when($filter['status'], function ($query, $status) {
-        //     return $query->where('a.status', $status);
-        // })
+            )
+            ->when($filter['loan'] ?? false, function ($query, $no_loan) {
+                return $query->where('b.no_loan', 'ilike', '%' . $no_loan . '%');
+            })
+            ->when($filter['user'] ?? false, function ($query, $user) {
+                return $query->where('b.user_id', $user);
+            });
         // ->orderBy('a.updated_at', 'desc');
     }
 }

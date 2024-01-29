@@ -19,7 +19,7 @@ class BorrowingHistoryController extends Controller
         $limit = $request->input('limit') ? $request->input('limit') : 10;
         $sorted_by = $request->input('sorted_by') ? $request->input('sorted_by') : 'created_at';
         $sort = $request->input('sort') ? $request->input('sort') : 'desc';
-        $borrowing_history = BorrowingHistory::History()->paginate($limit);
+        $borrowing_history = BorrowingHistory::History(request(['loan', 'user']))->paginate($limit);
         // ->orderBy($sorted_by, $sort)
 
         return $this->paginateResponse(BorrowingHistoryResource::collection($borrowing_history));
